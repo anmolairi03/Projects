@@ -1,0 +1,228 @@
+<html>
+    <head>
+        <title>
+            rock-paper-scissors
+        </title>
+        <style>
+            body{
+                background-color: rgb(25, 25, 25);
+                color:white;
+                font-family:arial;
+                align-items: center;
+            }
+
+            .move-icon{
+                height:50px;
+            }
+
+
+            .auto-play-button{
+                padding:8px 15px;
+           background-color: white(240, 242, 244);
+          border:none;
+          font-size:15px;
+          cursor:pointer;
+            }
+
+            .move{
+                background-color: transparent;
+                border: 3px white solid;
+                height:120px;
+                width:120px;
+                border-radius:60px;
+                margin-right:10px;
+                cursor:pointer;
+                margin-bottom:30px;
+            }
+
+            .js-result{
+                font-size: 25px;
+                font-weight: bold;
+                margin-bottom:30px;
+            }
+
+           .js-score{
+            margin-top:50px;
+           }
+
+           .reset{
+           padding:8px 15px;
+           background-color: white(240, 242, 244);
+          border:none;
+          font-size:15px;
+          cursor:pointer;
+           }
+
+           .title{
+            font-size:30px;
+            margin-top:30px;
+            font-weight: bold;
+           }
+
+        </style>
+    </head>
+<body><center>
+    <p class="title">Rock Paper Scissors</p>
+
+<button class="move" onclick="
+playermove('Rock');
+">
+<img src="images/rock-emoji.png" class="move-icon">
+</button>
+
+<button class="move" onclick="
+
+playermove('Paper')"> 
+<img src="images/paper-emoji.png" class="move-icon">
+</button>
+
+<button class="move" onclick="
+
+playermove('Scissors')"> 
+<img src="images/scissors-emoji.png" class="move-icon">
+</button>
+
+
+<p class="js-result"></p>
+<p class="js-moves"></p>
+<p class="js-score"></p>
+
+<button class="reset" onclick="
+score.Win=0,
+score.Lose=0,
+score.Tie=0,
+localStorage.removeItem('score');
+updatescore();
+">
+Reset Game
+</button>
+
+
+<button class="auto-play-button" onclick="
+playGame();
+">
+Auto Play
+</button>
+</center>
+            <script>
+
+    let score=JSON.parse(localStorage.getItem('score')) || {
+        Win:0,
+        Lose:0,
+        Tie:0
+    };
+    
+   updatescore();
+
+function computerMove(){
+    const randomMove=Math.random();
+    let cMove
+    if(randomMove>0 && randomMove<=0.3){
+    cMove='Rock';
+}
+else if(randomMove>0.3 && randomMove<=0.67){
+    cMove='Paper';
+}
+else{
+    cMove='Scissors';
+}
+return cMove;
+}
+
+
+function playermove(move){
+    const computer=computerMove();
+    let result ='';
+if(move==='Rock'){
+    if(computer==='Rock')
+    {
+        result='Tie';
+        score.Tie++;
+    }
+    else if(computer==='Paper'){
+        result='Lose';
+        score.Lose++;
+    }
+    else{
+        result='Win';
+        score.Win++;
+    }
+}
+else if(move==='Paper'){
+    if(computer==='Rock')
+    {
+        result='Win';
+        score.Win++;
+    }
+    else if(computer==='Paper'){
+        result='Tie';
+        score.Tie++;
+    }
+    else{
+        result='Lose';
+        score.Lose++;
+    }
+}
+else if(move==='Scissors'){
+    if(computer==='Rock')
+    {
+        result='Lose';
+        score.Lose++;
+    }
+    else if(computer==='Paper'){
+        result='Win';
+        score.Win++;
+    }
+    else{
+        result='Tie';
+        score.Tie++;
+    }
+}
+
+localStorage.setItem('score',JSON.stringify(score));
+
+document.querySelector('.js-moves').innerHTML=`You <img src="images/${move}-emoji.png" class="move-icon">  <img src="images/${computer}-emoji.png" class="move-icon"> Computer`;
+
+
+if(result==='Tie'){
+    document.querySelector('.js-result').innerHTML=`${result}.`;
+}else{
+document.querySelector('.js-result').innerHTML=`You ${result}.`;
+}
+
+
+updatescore();
+}
+ 
+function updatescore(){
+    document.querySelector('.js-score').innerHTML=`Wins: ${score.Win}, Losses: ${score.Lose}, Ties: ${score.Tie}`;
+}
+
+
+let intervalID; // Corrected variable name
+
+function playGame() {
+    if (!intervalID) {
+        intervalID = setInterval(function() {
+            const random = Math.random();
+            let Move;
+            if (random > 0 && random <= 0.3) {
+                Move = 'Rock';
+            } else if (random > 0.3 && random <= 0.67) {
+                Move = 'Paper';
+            } else {
+                Move = 'Scissors';
+            }
+            playermove(Move);
+        }, 1000);
+    } else {
+        clearInterval(intervalID);
+        intervalID = null;
+    }
+}
+
+        </script>
+
+
+</body>
+</html>
