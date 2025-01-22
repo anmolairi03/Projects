@@ -10,8 +10,8 @@ import requests
 
 def spotify():
     username = 'Zeus'
-    clientID = '1976f6ec4d7a40fda77d4e10e83d5d77'
-    clientSecret = '4082e028a53540caa5e414de0d8f199a'
+    clientID = ''
+    clientSecret = ''
     redirect_uri = 'http://google.com/callback/'
 
     # Set up OAuth
@@ -59,7 +59,7 @@ def spotify():
         except Exception as e:
             print(e)
 
-newsapi="da3ef009028f4940b2b3bd4dedbe74a9"
+newsapi=""
 recogniser=sr.Recognizer()
 engine=pyttsx3.init()
 # volume = engine.getProperty('volume')   #getting to know current volume level (min=0 and max=1)
