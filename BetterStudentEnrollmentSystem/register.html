@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Registration</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Enroll in a Course</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Register for a Course</h2>
+        <form id="enrollmentForm">
+            <label for="name">Student Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="mobile">Mobile Number:</label>
+            <input type="number" id="mobile" name="mobile" required>
+
+            <label for="course">Select Course:</label>
+            <select id="course" name="course"></select>
+
+            <input type="submit" value="Enroll Now">
+        </form>
+
+        <p id="confirmationMessage"></p>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 University Enrollment System</p>
+    </footer>
+
+    <script src="display_courses.js"></script>
+</body>
+</html>

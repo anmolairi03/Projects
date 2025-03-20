@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<courses>
+    <course>
+        <name>Web Technologies using HTML</name>
+        <code>CIE-356T-A1</code>
+        <duration>11 Days</duration>
+        <eligibility>Basic Web Development Knowledge</eligibility>
+        <fees>500</fees>
+    </course>
+    <course>
+        <name>Data Structures and Algorithms</name>
+        <code>CIE-400T-DSA</code>
+        <duration>30 Days</duration>
+        <eligibility>Basic Programming</eligibility>
+        <fees>1500</fees>
+    </course>
+</courses>
