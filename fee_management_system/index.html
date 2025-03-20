@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration</title>
+    <style>
+        /* General body styling with dynamic gradient background */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Gradient background animation */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Header styling */
+        .header {
+            width: 100%;
+            height: 80px;
+            background: #333; /* Dark background */
+            padding: 10px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex; /* Use flexbox for layout */
+            justify-content: space-evenly; /* Space links evenly */
+            align-items: center; /* Center links vertically */
+        }
+
+        .header a {
+            top: 5px;
+            padding-bottom: 10px;
+            align-items: center;
+            margin: 0 15px;
+            text-decoration: none;
+            color: #fff; /* White text */
+            font-size: 18px;
+            font-weight: bold;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        /* Neon blue underline hover effect */
+        .header a::after {
+            content: '';
+            position: absolute;
+            left: 50%; /* Start from the middle */
+            bottom: 0px;
+            width: 0;
+            height: 2px;
+            background: #00bfff; /* Neon blue color */
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+
+        .header a:hover::after {
+            width: 100%; /* Stretch to the end */
+            left: 0; /* Move to the start */
+        }
+
+        /* Form container styling */
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            margin-top: 80px; /* Add margin to avoid overlap with header */
+        }
+
+        /* Form heading styling */
+        .form-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 24px;
+        }
+
+        /* Input field styling */
+        .form-container input[type="number"],
+        .form-container input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        /* Submit button styling */
+        .form-container input[type="submit"] {
+            background: #23a6d5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background: #1e87b0;
+        }
+
+        /* Error message styling */
+        .error-message {
+            color: #ff4444;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            var id = document.forms["registrationForm"]["id"].value;
+            var name = document.forms["registrationForm"]["name"].value;
+            var email = document.forms["registrationForm"]["email"].value;
+            var phone = document.forms["registrationForm"]["phone"].value;
+            var errorMessage = "";
+
+            // Validate ID
+            if (id == "" || isNaN(id)) {
+                errorMessage = "ID must be a number";
+            }
+            // Validate Name
+            else if (name == "") {
+                errorMessage = "Name must be filled out";
+            }
+            // Validate Phone
+            else if (!/^\d{10}$/.test(phone)) {
+                errorMessage = "Phone number must be 10 digits";
+            }
+            // Validate Email
+            else if (!/\S+@\S+\.\S+/.test(email)) {
+                errorMessage = "Invalid email address";
+            }
+
+            // Display error message
+            if (errorMessage) {
+                document.getElementById("error-message").innerText = errorMessage;
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <a href="index.html">Home</a>
+        <a href="payment.html">Fee Payment</a>
+        <a href="feeStatus.html">Fee Status Tracking</a>
+        <a href="report.jsp">Report Generation</a>
+    </div>
+
+    <!-- Registration Form -->
+    <div class="form-container">
+        <h2>Student Registration</h2>
+        <form name="registrationForm" action="registerStudent.jsp" onsubmit="return validateForm()" method="post">
+            <input type="number" name="id" placeholder="ID" required><br><br>
+            <input type="text" name="name" placeholder="Name" required><br><br>
+            <input type="text" name="email" placeholder="Email" required><br><br>
+            <input type="text" name="phone" placeholder="Phone" required><br><br>
+            <input type="submit" value="Register">
+        </form>
+        <div id="error-message" class="error-message"></div>
+    </div>
+</body>
+</html>
