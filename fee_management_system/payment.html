@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fee Payment</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .form-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 24px;
+        }
+
+        .form-container input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .form-container input[type="submit"] {
+            background: #23a6d5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background: #1e87b0;
+        }
+
+        .error-message {
+            color: #ff4444;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function validatePayment() {
+            var studentId = document.forms["paymentForm"]["studentId"].value;
+            var amount = document.forms["paymentForm"]["amount"].value;
+            var errorMessage = "";
+
+            if (studentId == "" || amount == "") {
+                errorMessage = "All fields must be filled out";
+            } else if (isNaN(amount) || amount <= 0) {
+                errorMessage = "Amount must be a positive number";
+            }
+
+            if (errorMessage) {
+                document.getElementById("error-message").innerText = errorMessage;
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Fee Payment</h2>
+        <form name="paymentForm" action="processPayment.jsp" onsubmit="return validatePayment()" method="post">
+            Student ID: <input type="text" name="studentId" placeholder="Student ID"><br><br>
+            Amount: <input type="text" name="amount" placeholder="Amount"><br><br>
+            <input type="submit" value="Pay">
+        </form>
+        </form>
+        <div id="error-message" class="error-message"></div>
+    </div>
+</body>
+</html>
